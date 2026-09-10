@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from . import models  # Loads all table definitions before Base.metadata.create_all().
 from .database import create_db_and_tables
 from .routes import router
 from .schemas import UserCreate, UserRead, UserUpdate

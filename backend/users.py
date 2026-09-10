@@ -9,7 +9,8 @@ from fastapi_users.authentication import (
     JWTStrategy,
 )
 
-from .database import User, get_user_db
+from .database import get_user_db
+from .models import User
 
 JWT_SECRET = os.getenv("JWT_SECRET", "change-this-secret-before-production")
 

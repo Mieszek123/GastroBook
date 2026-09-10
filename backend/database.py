@@ -1,7 +1,7 @@
 from collections.abc import AsyncGenerator
 
 from fastapi import Depends
-from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
@@ -10,10 +10,6 @@ DATABASE_URL = "sqlite+aiosqlite:///./gastrobook.db"
 
 class Base(DeclarativeBase):
     pass
-
-
-class User(SQLAlchemyBaseUserTableUUID, Base):
-    """User table managed by FastAPI Users."""
 
 
 engine = create_async_engine(DATABASE_URL)
@@ -33,4 +29,6 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
 async def get_user_db(
     session: AsyncSession = Depends(get_async_session),
 ) -> AsyncGenerator[SQLAlchemyUserDatabase, None]:
+    from .models import User
+
     yield SQLAlchemyUserDatabase(session, User)
