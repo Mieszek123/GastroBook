@@ -4,4 +4,4 @@ from .database import Base
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
-    """Tabela użytkowników obsługiwana przez FastAPI Users."""
+    """Automatycznie przez fastapiusers, nie zmieniaj nic"""
