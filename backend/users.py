@@ -12,7 +12,7 @@ from fastapi_users.authentication import (
 from .database import get_user_db
 from .models import User
 
-JWT_SECRET = os.getenv("JWT_SECRET", "change-this-secret-before-production")
+JWT_SECRET = os.getenv("JWT_SECRET")
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
