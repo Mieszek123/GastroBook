@@ -8,6 +8,7 @@ from .database import Base
 class User(SQLAlchemyBaseUserTableUUID, Base):
     phone_number = Column(String, nullable=False, unique=True)
     verification_code = Column(Integer, nullable=True)
+    verification_code_expires = Column(DateTime(timezone=True), nullable=True)
 
 class Tables(Base):
     __tablename__ = "tables"

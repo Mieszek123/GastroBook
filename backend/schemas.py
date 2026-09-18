@@ -9,16 +9,19 @@ from pydantic import BaseModel
 class UserRead(schemas.BaseUser[uuid.UUID]):
     phone_number: Optional[str] = None
     verification_code: Optional[int] = None
+    verification_code_expires: Optional[datetime] = None
 
 
 class UserCreate(schemas.BaseUserCreate):
     phone_number: str
     verification_code: Optional[int] = None
+    verification_code_expires: Optional[datetime] = None
 
 
 class UserUpdate(schemas.BaseUserUpdate):
     phone_number: Optional[str] = None
     verification_code: Optional[int] = None
+    verification_code_expires: Optional[datetime] = None
 
 # ----------
 

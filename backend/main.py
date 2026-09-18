@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import models  # Loads all table definitions before Base.metadata.create_all().
+from .auth_router import router as auth_router
 from .database import create_db_and_tables
 from .routes import router
 from .schemas import UserCreate, UserRead, UserUpdate
@@ -43,4 +44,5 @@ app.include_router(
     prefix="/users",
     tags=["users"],
 )
+app.include_router(auth_router)
 app.include_router(router)

@@ -17,9 +17,4 @@ async def list_restaurants() -> list[dict[str, str]]:
     return []
 
 
-@router.get("/reservations/", tags=["reservations"])
-async def list_reservations(
-    user=Depends(current_active_user),
-) -> list[dict[str, str]]:
-    """Temporary protected endpoint; it requires a logged-in user."""
-    return []
+
