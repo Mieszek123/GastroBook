@@ -15,7 +15,7 @@ async def verify_code(
     user_manager: UserManager = Depends(get_user_manager),
 ):
     now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-    user = await user_manager.get_by_email(email)
+    user = await user_manager.user_db.get_by_email(email)
 
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
