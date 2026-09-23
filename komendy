@@ -1,2 +1,3 @@
 npm run dev
 uv run uvicorn backend.main:app --reload
+pytest -v -s
