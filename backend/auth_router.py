@@ -4,18 +4,18 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import EmailStr
 
 from .users import UserManager, get_user_manager
+from .schemas import VerifyCodeRequest
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post("/verify_code")
 async def verify_code(
-    email: EmailStr,
-    code: int,
-    user_manager: UserManager = Depends(get_user_manager),
+    data: VerifyCodeRequest,
+    user_manager: UserManager = Depends(get_user_manager)
 ):
     now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-    user = await user_manager.user_db.get_by_email(email)
+    user = await user_manager.user_db.get_by_email(data.email)
 
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -29,7 +29,7 @@ async def verify_code(
     if expires_at is not None and expires_at < now_utc:  
         raise HTTPException(status_code=400, detail="Verification code expired")
 
-    if saved_code != code:
+    if saved_code != data.code:
         raise HTTPException(status_code=400, detail="Invalid verification code")
 
     await user_manager.user_db.update(
