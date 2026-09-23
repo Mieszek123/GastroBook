@@ -15,8 +15,6 @@ def test_register(client):
 
 
 def test_login(client):
-    # najpierw rejestrujemy usera WEWNĄTRZ tego testu,
-    # bo baza jest pusta i nie może polegać na innym teście
     client.post("/auth/register", json={
         "email": "testowy@mieszek.dev",
         "password": "haslo123",
